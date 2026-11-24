@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Science Career & AI Agency Command Center</title>
+  <style>
+    :root {
+      --bg-base: #090c12;
+      --bg-surface: #101520;
+      --bg-card: #161d2c;
+      --bg-card-hover: #1b2436;
+      --bg-input: #0c1018;
+      --border: #232d42;
+      --border-focus: #38bdf8;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-dim: rgba(56, 189, 248, 0.14);
+      --indigo: #818cf8;
+      --indigo-dim: rgba(129, 140, 248, 0.15);
+      --emerald: #34d399;
+      --emerald-dim: rgba(52, 211, 153, 0.14);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251, 191, 36, 0.14);
+      --purple: #c084fc;
+      --purple-dim: rgba(192, 132, 252, 0.14);
+      --rose: #fb7185;
+      --rose-dim: rgba(251, 113, 133, 0.14);
+      --radius: 10px;
+      --radius-sm: 6px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: #263147; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #364665; }
+
+    /* Layout & Header */
+    .app-shell {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 18px 22px 48px;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .brand h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .topbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 13px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--bg-card-hover);
+      border-color: #364563;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #06121e;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background: #67cefa;
+      border-color: #67cefa;
+    }
+
+    .btn-indigo {
+      background: var(--indigo-dim);
+      color: #c7d2fe;
+      border-color: rgba(129, 140, 248, 0.4);
+    }
+
+    .btn-indigo:hover {
+      background: rgba(129, 140, 248, 0.25);
+    }
+
+    .btn-danger {
+      color: var(--rose);
+      border-color: rgba(251, 113, 133, 0.3);
+      background: rgba(251, 113, 133, 0.08);
+    }
+
+    .btn-danger:hover {
+      background: rgba(251, 113, 133, 0.18);
+    }
+
+    .btn-sm {
+      padding: 5px 9px;
+      font-size: 0.76rem;
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      padding: 8px 11px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--border-focus);
+    }
+
+    .textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.5;
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Navigation Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 15px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: var(--radius);
+      font-size: 0.86rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-card);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .tab-count {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: inherit;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.18s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section Header */
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .section-title p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-portfolio { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.25); }
+    .badge-agency { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(192, 132, 252, 0.25); }
+    .badge-emerald { background: var(--emerald-dim); color: var(--emerald); }
+    .badge-amber { background: var(--amber-dim); color: var(--amber); }
+    .badge-indigo { background: var(--indigo-dim); color: var(--indigo); }
+    .badge-rose { background: var(--rose-dim); color: var(--rose); }
+    .badge-muted { background: rgba(148, 163, 184, 0.12); color: var(--text-secondary); }
+
+    /* 1. Kanban Board */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(260px, 1fr));
+      gap: 14px;
+      align-items: start;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    @media (max-width: 1120px) {
+      .kanban-board { grid-template-columns: repeat(2, minmax(260px, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .kanban-board { grid-template-columns: 1fr; }
+    }
+
+    .kanban-col {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      min-height: 420px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .kanban-col.drag-over {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .kanban-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .col-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .col-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .kanban-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      cursor: grab;
+      transition: transform 0.12s ease, border-color 0.15s ease;
+    }
+
+    .project-card:hover {
+      border-color: #364766;
+      background: var(--bg-card-hover);
+    }
+
+    .project-card.dragging {
+      opacity: 0.5;
+      cursor: grabbing;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .card-desc {
+      font-size: 0.79rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .tech-tag {
+      font-family: var(--font-mono);
+      font-size: 0.69rem;
+      padding: 2px 6px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    .card-metric {
+      font-family: var(--font-mono);
+      font-size: 0.73rem;
+      color: var(--emerald);
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card-move-select {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      padding: 3px 6px;
+      border-radius: 4px;
+      max-width: 135px;
+    }
+
+    /* 2. Job Tracker */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-sub {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: var(--bg-input);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--emerald));
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .filters-bar {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, minmax(140px, 1fr));
+      gap: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .filters-bar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .filters-bar { grid-template-columns: 1fr; }
+    }
+
+    .table-wrap {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 920px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.83rem;
+    }
+
+    th {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      font-weight: 600;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .mono { font-family: var(--font-mono); font-size: 0.78rem; }
+
+    /* 3. CV & Outreach Tailor */
+    .tailor-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .tailor-grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .mode-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .mode-pill {
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .mode-pill.active {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .detected-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .output-box {
+      width: 100%;
+      min-height: 360px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      line-height: 1.55;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      resize: vertical;
+      outline: none;
+    }
+
+    .output-box:focus { border-color: var(--accent); }
+
+    /* 4. Weekly Sprint Planner */
+    .sprint-layout {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .sprint-layout { grid-template-columns: 1fr; }
+    }
+
+    .allocation-bar {
+      display: flex;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      margin: 10px 0 14px;
+    }
+
+    .pillar-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .pillar-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+    }
+
+    .day-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 10px;
+    }
+
+    .day-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+
+    .day-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-card-header h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .block-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      margin-bottom: 7px;
+      font-size: 0.78rem;
+    }
+
+    .block-item.done {
+      opacity: 0.6;
+    }
+
+    .block-item.done .block-task {
+      text-decoration: line-through;
+    }
+
+    .habit-row {
+      display: grid;
+      grid-template-columns: 1fr repeat(7, 26px) 24px;
+      gap: 4px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+
+    .habit-row:last-child { border-bottom: none; }
+
+    .habit-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: transparent;
+      transition: all 0.12s ease;
+    }
+
+    .habit-check.checked {
+      background: var(--emerald-dim);
+      border-color: var(--emerald);
+      color: var(--emerald);
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 10, 0.78);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 620px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 560px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-group { margin-bottom: 12px; }
+    .form-full { grid-column: 1 / -1; }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .scope-template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 560px) {
+      .scope-template-grid { grid-template-columns: 1fr; }
+    }
+
+    .scope-tpl-btn {
+      text-align: left;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .scope-tpl-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .scope-tpl-btn strong {
+      display: block;
+      font-size: 0.82rem;
+      margin-bottom: 3px;
+    }
+
+    .scope-tpl-btn span {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--accent);
+      color: var(--text-primary);
+      padding: 10px 15px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 28px 14px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Data Science Career & AI Agency Command Center</h1>
+          <p>Post-Exam Launchpad • Q1/2027 Internships, Global Remote & AI Automation Offers</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn btn-sm" id="exportJsonBtn" title="Download full backup as JSON">
+          ⬇ Export JSON
+        </button>
+        <label class="btn btn-sm" for="importJsonInput" title="Restore data from a JSON backup">
+          ⬆ Import JSON
+        </label>
+        <input type="file" id="importJsonInput" accept="application/json" style="display:none" />
+        <button class="btn btn-sm btn-danger" id="resetDemoBtn" title="Reset to starter data">
+          ↺ Reset Demo
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs-nav" role="tablist">
+      <button class="tab-btn active" data-tab="projects" role="tab">
+        <span>1. Project & Agency Builder</span>
+        <span class="tab-count" id="tabCountProjects">0</span>
+      </button>
+      <button class="tab-btn" data-tab="jobs" role="tab">
+        <span>2. Internship & Online Job Tracker</span>
+        <span class="tab-count" id="tabCountJobs">0</span>
+      </button>
+      <button class="tab-btn" data-tab="tailor" role="tab">
+        <span>3. CV & Outreach Tailor</span>
+      </button>
+      <button class="tab-btn" data-tab="sprint" role="tab">
+        <span>4. Weekly Sprint Planner</span>
+        <span class="tab-count" id="tabCountSprint">0h</span>
+      </button>
+    </nav>
+
+    <!-- TAB 1: Project & Agency Builder -->
+    <section class="tab-panel active" id="tab-projects">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Project & AI Agency Pipeline</h2>
+          <p>Drag cards across stages or use the quick stage selector. Track evals, business impact & live links.</p>
+        </div>
+        <div class="toolbar">
+          <select class="select" id="projectTypeFilter" style="width:auto">
+            <option value="ALL">All Types</option>
+            <option value="Portfolio Project">Portfolio Projects</option>
+            <option value="AI Agency Offer">AI Agency Offers</option>
+          </select>
+          <button class="btn btn-indigo" id="openScopeModalBtn">✦ Generate Project Scope</button>
+          <button class="btn btn-primary" id="addProjectBtn">+ New Card</button>
+        </div>
+      </div>
+
+      <div class="kanban-board" id="kanbanBoard"></div>
+    </section>
+
+    <!-- TAB 2: Internship & Online Job Tracker -->
+    <section class="tab-panel" id="tab-jobs">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Internship & Online Job Tracker</h2>
+          <p>Filter across South Africa, Remote Global, and Q1/2027 Intakes. Stay on top of follow-ups.</p>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-sm" id="editWeeklyTargetBtn">🎯 Edit Weekly Target</button>
+          <button class="btn btn-primary" id="addJobBtn">+ Add Application</button>
+        </div>
+      </div>
+
+      <!-- Quick Stats Bar -->
+      <div class="stats-grid" id="jobStatsGrid"></div>
+
+      <!-- Filters -->
+      <div class="filters-bar">
+        <input type="text" class="input" id="jobSearchInput" placeholder="Search role or company..." />
+        <select class="select" id="jobLocationFilter">
+          <option value="ALL">All Locations / Intakes</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Remote Global">Remote Global</option>
+          <option value="Q1/2027 Intakes">Q1/2027 Intakes</option>
+        </select>
+        <select class="select" id="jobCategoryFilter">
+          <option value="ALL">All Categories</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Data Analyst">Data Analyst</option>
+          <option value="BI">BI</option>
+          <option value="Data Engineering">Data Engineering</option>
+          <option value="AI Automation">AI Automation</option>
+        </select>
+        <select class="select" id="jobStatusFilter">
+          <option value="ALL">All Statuses</option>
+          <option value="Saved">Saved</option>
+          <option value="Applied">Applied</option>
+          <option value="Assessment">Assessment</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Offer</option>
+        </select>
+        <button class="btn" id="clearJobFiltersBtn">Clear Filters</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Role Title</th>
+              <th>Company</th>
+              <th>Location / Intake</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Date Applied</th>
+              <th>Follow-Up</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="jobsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 3: CV & Outreach Tailor -->
+    <section class="tab-panel" id="tab-tailor">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>CV & Outreach Tailor</h2>
+          <p>Paste a Job Description or Potential Client Business Description to generate tailored assets in one click.</p>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-sm" id="loadSampleJdBtn">Load Sample JD</button>
+          <button class="btn btn-sm" id="loadSampleClientBtn">Load Sample Agency Lead</button>
+        </div>
+      </div>
+
+      <div class="tailor-grid">
+        <!-- Left Input Column -->
+        <div class="panel">
+          <div class="form-group">
+            <label class="field-label" for="tailorSenderContext">Your Anchor Profile / Proof Point (Saved Automatically)</label>
+            <input type="text" class="input" id="tailorSenderContext" placeholder="e.g., Final-year Data Science grad (Python, SQL, Power BI, RAG workflows, 94% extraction accuracy)" />
+          </div>
+
+          <div class="form-group">
+            <label class="field-label" for="tailorInputText">Paste Job Description or Client Business Description</label>
+            <textarea class="textarea" id="tailorInputText" style="min-height: 210px" placeholder="Paste the job posting, LinkedIn brief, or company description here..."></textarea>
+          </div>
+
+          <label class="field-label">Select Output Mode</label>
+          <div class="mode-pills" id="tailorModePills">
+            <button class="mode-pill active" data-mode="cv">Tailor CV Bullets</button>
+            <button class="mode-pill" data-mode="outreach">Cold Outreach Message</button>
+            <button class="mode-pill" data-mode="discovery">Discovery Call Questions</button>
+          </div>
+
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <button class="btn btn-primary" id="generateTailorBtn" style="flex:1">⚡ Generate Structured Output</button>
+          </div>
+
+          <div style="margin-top:14px;">
+            <label class="field-label">Detected Signals & Keywords</label>
+            <div class="detected-chips" id="detectedSignals"></div>
+          </div>
+        </div>
+
+        <!-- Right Output Column -->
+        <div class="panel">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <label class="field-label" style="margin:0" id="tailorOutputLabel">Structured Output — Tailor CV Bullets</label>
+            <button class="btn btn-primary btn-sm" id="copyTailorOutputBtn">📋 One-Click Copy</button>
+          </div>
+          <textarea class="output-box" id="tailorOutputBox" spellcheck="false"></textarea>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">
+            Tip: Edit brackets like <code>[X%]</code> or <code>[Name]</code> directly above before copying.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: Weekly Sprint Planner -->
+    <section class="tab-panel" id="tab-sprint">
+      <div class="section-header">
+        <div class="section-title">
+          <h2>Weekly Sprint Planner</h2>
+          <p>Balance post-exam execution across building, applying, interview prep, and client delivery.</p>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-sm" id="addHabitBtn">+ Add Daily Habit</button>
+          <button class="btn btn-primary" id="addTimeBlockBtn">+ Add Time Block</button>
+        </div>
+      </div>
+
+      <!-- Time Allocation Overview -->
+      <div class="panel" style="margin-bottom:16px;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px;">
+          <div>
+            <strong style="font-size:0.92rem;">Weekly Pillar Allocation</strong>
+            <span id="sprintSummaryText" style="font-size:0.8rem; color:var(--text-secondary); margin-left:8px;"></span>
+          </div>
+          <span class="mono" style="font-size:0.78rem; color:var(--text-secondary);" id="sprintCompletionPct">0% completed</span>
+        </div>
+        <div class="allocation-bar" id="allocationBar"></div>
+        <div class="pillar-legend" id="pillarLegend"></div>
+      </div>
+
+      <div class="sprint-layout">
+        <!-- Time Blocks by Day -->
+        <div class="panel">
+          <h3 style="font-size:0.94rem; margin-bottom:12px;">Weekly Time-Blocks (Mon – Sun)</h3>
+          <div class="day-list" id="sprintDaysGrid"></div>
+        </div>
+
+        <!-- Daily Habits Checklist -->
+        <div class="panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h3 style="font-size:0.94rem;">Daily Non-Negotiable Habits</h3>
+            <span class="mono" style="font-size:0.73rem; color:var(--emerald);" id="habitScoreLabel">0/0</span>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr repeat(7, 26px) 24px; gap:4px; font-size:0.68rem; color:var(--text-muted); text-align:center; padding-bottom:6px; border-bottom:1px solid var(--border);">
+            <span style="text-align:left;">Habit</span>
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+            <span></span>
+          </div>
+          <div id="habitsContainer"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MODAL: Add / Edit Project Card -->
+  <div class="modal-backdrop" id="projectModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="projectModalTitle">New Project / Offer Card</h3>
+        <button class="btn btn-sm" onclick="closeModal('projectModal')">✕</button>
+      </div>
+      <form id="projectForm">
+        <input type="hidden" id="projId" />
+        <div class="form-grid">
+          <div class="form-group form-full">
+            <label class="field-label" for="projTitle">Title</label>
+            <input type="text" class="input" id="projTitle" required placeholder="e.g., Invoice & Waybill AI Extraction Pipeline" />
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="projType">Type</label>
+            <select class="select" id="projType">
+              <option value="Portfolio Project">Portfolio Project</option>
+              <option value="AI Agency Offer">AI Agency Offer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="projStage">Stage</label>
+            <select class="select" id="projStage">
+              <option value="Idea">Idea</option>
+              <option value="Building">Building</option>
+              <option value="Testing & Evals">Testing & Evals</option>
+              <option value="Live Portfolio/Client Ready">Live Portfolio/Client Ready</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label class="field-label" for="projStack">Tech Stack (comma-separated)</label>
+            <input type="text" class="input" id="projStack" placeholder="Python, FastAPI, LangGraph, pgvector, Docker" />
+          </div>
+          <div class="form-group form-full">
+            <label class="field-label" for="projProblem">Business Problem Solved</label>
+            <textarea class="textarea" id="projProblem" placeholder="Manual data entry from PDF supplier invoices costs ops teams 12+ hrs/week..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="projMetric">Evaluation Metric</label>
+            <input type="text" class="input" id="projMetric" placeholder="e.g., 96.4% field accuracy, <1.8s latency" />
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="projLink">GitHub / Demo Link</label>
+            <input type="url" class="input" id="projLink" placeholder="https://github.com/..." />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" onclick="closeModal('projectModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Generate Project Scope Helper -->
+  <div class="modal-backdrop" id="scopeModal">
+    <div class="modal" style="max-width:700px;">
+      <div class="modal-header">
+        <h3>✦ Generate Project Scope Helper</h3>
+        <button class="btn btn-sm" onclick="closeModal('scopeModal')">✕</button>
+      </div>
+      <label class="field-label">1. Choose an AI / Data Template</label>
+      <div class="scope-template-grid" id="scopeTemplateGrid">
+        <button type="button" class="scope-tpl-btn active" data-tpl="rag">
+          <strong>RAG Assistants</strong>
+          <span>Internal SOP / policy Q&A with citations & evals</span>
+        </button>
+        <button type="button" class="scope-tpl-btn" data-tpl="kpi">
+          <strong>Automated KPI Dashboards</strong>
+          <span>ETL + anomaly alerts + executive BI view</span>
+        </button>
+        <button type="button" class="scope-tpl-btn" data-tpl="extract">
+          <strong>Lead / Document Extraction</strong>
+          <span>PDF/email structured parsing into CRM/ERP</span>
+        </button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="field-label" for="scopeNiche">Target Niche / Domain</label>
+          <input type="text" class="input" id="scopeNiche" value="Logistics & Freight SMEs" />
+        </div>
+        <div class="form-group">
+          <label class="field-label" for="scopeCardType">Save As Type</label>
+          <select class="select" id="scopeCardType">
+            <option value="AI Agency Offer">AI Agency Offer</option>
+            <option value="Portfolio Project">Portfolio Project</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="field-label" for="scopePreview">2. Generated Scope Preview (Editable)</label>
+        <textarea class="output-box" id="scopePreview" style="min-height:220px;"></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn" id="copyScopeBtn">📋 Copy Scope</button>
+        <button type="button" class="btn btn-primary" id="addScopeToBoardBtn">+ Add Directly to Idea Column</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add / Edit Job Application -->
+  <div class="modal-backdrop" id="jobModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="jobModalTitle">Add Application</h3>
+        <button class="btn btn-sm" onclick="closeModal('jobModal')">✕</button>
+      </div>
+      <form id="jobForm">
+        <input type="hidden" id="jobId" />
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="field-label" for="jobRole">Role Title</label>
+            <input type="text" class="input" id="jobRole" required placeholder="e.g., Junior Data Scientist" />
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobCompany">Company</label>
+            <input type="text" class="input" id="jobCompany" required placeholder="e.g., Discovery / Takealot / Remote Startup" />
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobLocation">Location / Remote</label>
+            <select class="select" id="jobLocation">
+              <option value="South Africa">South Africa (Hybrid / On-site)</option>
+              <option value="South Africa (Remote)">South Africa (Remote)</option>
+              <option value="Remote Global">Remote Global</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobIntake">Intake / Cycle Tag</label>
+            <select class="select" id="jobIntake">
+              <option value="Q1/2027 Intakes">Q1/2027 Intakes</option>
+              <option value="Immediate / Rolling">Immediate / Rolling</option>
+              <option value="Contract / Freelance">Contract / Freelance</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobCategory">Role Category</label>
+            <select class="select" id="jobCategory">
+              <option value="Data Science">Data Science</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="BI">BI</option>
+              <option value="Data Engineering">Data Engineering</option>
+              <option value="AI Automation">AI Automation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobStatus">Status</label>
+            <select class="select" id="jobStatus">
+              <option value="Saved">Saved</option>
+              <option value="Applied">Applied</option>
+              <option value="Assessment">Assessment</option>
+              <option value="Interview">Interview</option>
+              <option value="Offer">Offer</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobAppliedDate">Date Applied</label>
+            <input type="date" class="input" id="jobAppliedDate" />
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="jobFollowUpDate">Follow-Up Date</label>
+            <input type="date" class="input" id="jobFollowUpDate" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" onclick="closeModal('jobModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Time Block -->
+  <div class="modal-backdrop" id="timeBlockModal">
+    <div class="modal" style="max-width:460px;">
+      <div class="modal-header">
+        <h3>Add Weekly Time Block</h3>
+        <button class="btn btn-sm" onclick="closeModal('timeBlockModal')">✕</button>
+      </div>
+      <form id="timeBlockForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="field-label" for="tbDay">Day</label>
+            <select class="select" id="tbDay">
+              <option>Mon</option><option>Tue</option><option>Wed</option>
+              <option>Thu</option><option>Fri</option><option>Sat</option><option>Sun</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="field-label" for="tbHours">Hours</label>
+            <input type="number" step="0.5" min="0.5" max="12" class="input" id="tbHours" value="2" required />
+          </div>
+          <div class="form-group form-full">
+            <label class="field-label" for="tbPillar">Pillar</label>
+            <select class="select" id="tbPillar">
+              <option value="Deep Build">Deep Build (Projects/Agency)</option>
+              <option value="Applications & Outreach">Applications & Outreach</option>
+              <option value="Interview Prep">Interview Prep (SQL/Python/ML)</option>
+              <option value="Client Delivery">Client Delivery</option>
+            </select>
+          </div>
+          <div class="form-group form-full">
+            <label class="field-label" for="tbTask">Focus Task</label>
+            <input type="text" class="input" id="tbTask" required placeholder="e.g., Build RAG eval harness with 25 test questions" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" onclick="closeModal('timeBlockModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Block</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved</div>
+
+  <script>
+    const STORAGE_KEY = "ds_agency_command_center_v1";
+
+    const STAGES = [
+      { id: "Idea", color: "#94a3b8" },
+      { id: "Building", color: "#38bdf8" },
+      { id: "Testing & Evals", color: "#fbbf24" },
+      { id: "Live Portfolio/Client Ready", color: "#34d399" }
+    ];
+
+    const PILLARS = {
+      "Deep Build": { label: "Deep Build (Projects/Agency)", color: "#38bdf8" },
+      "Applications & Outreach": { label: "Applications & Outreach", color: "#818cf8" },
+      "Interview Prep": { label: "Interview Prep (SQL/Python/ML)", color: "#fbbf24" },
+      "Client Delivery": { label: "Client Delivery", color: "#34d399" }
+    };
+
+    const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    function getDefaultState() {
+      return {
+        projects: [
+          {
+            id: "p1",
+            title: "Policy & SOP RAG Copilot",
+            type: "AI Agency Offer",
+            stage: "Live Portfolio/Client Ready",
+            stack: "Python, FastAPI, pgvector, OpenAI, Ragas",
+            problem: "HR & ops teams waste 6+ hrs/week hunting across 120+ fragmented PDF policies.",
+            metric: "93% groundedness | 1.4s p95 latency",
+            link: "https://github.com/your-handle/sop-rag-copilot"
+          },
+          {
+            id: "p2",
+            title: "Supplier Invoice & Waybill Extractor",
+            type: "AI Agency Offer",
+            stage: "Testing & Evals",
+            stack: "Python, Pydantic, Gemini Vision, n8n, Postgres",
+            problem: "Manual re-keying of PDF freight invoices causes billing errors and delays.",
+            metric: "96.5% field F1 | 11 hrs/wk saved",
+            link: ""
+          },
+          {
+            id: "p3",
+            title: "Retail Churn & Basket Uplift Engine",
+            type: "Portfolio Project",
+            stage: "Building",
+            stack: "Python, DuckDB, LightGBM, SHAP, Streamlit",
+            problem: "Identify at-risk loyalty customers 30 days before churn with explainable drivers.",
+            metric: "0.87 ROC-AUC | +14% simulated retention",
+            link: "https://github.com/your-handle/churn-uplift"
+          },
+          {
+            id: "p4",
+            title: "Automated Executive KPI Digest",
+            type: "Portfolio Project",
+            stage: "Idea",
+            stack: "dbt, BigQuery, SQL, Metabase, Slack Webhook",
+            problem: "Founders wait until month-end to spot margin drops or CAC spikes.",
+            metric: "Daily 08:00 anomaly alert | <5m pipeline",
+            link: ""
+          }
+        ],
+        jobs: [
+          {
+            id: "j1",
+            role: "Graduate Data Scientist (Q1 2027)",
+            company: "Discovery Vitality",
+            location: "South Africa",
+            intake: "Q1/2027 Intakes",
+            category: "Data Science",
+            status: "Assessment",
+            appliedDate: "2026-11-18",
+            followUpDate: "2026-11-26"
+          },
+          {
+            id: "j2",
+            role: "Junior BI & Analytics Engineer",
+            company: "Takealot Group",
+            location: "South Africa",
+            intake: "Q1/2027 Intakes",
+            category: "BI",
+            status: "Applied",
+            appliedDate: "2026-11-21",
+            followUpDate: "2026-11-28"
+          },
+          {
+            id: "j3",
+            role: "AI Automation Engineer (Part-Time)",
+            company: "Northstar Ops Lab",
+            location: "Remote Global",
+            intake: "Immediate / Rolling",
+            category: "AI Automation",
+            status: "Interview",
+            appliedDate: "2026-11-15",
+            followUpDate: "2026-11-25"
+          },
+          {
+            id: "j4",
+            role: "Junior Data Analyst",
+            company: "Yoco",
+            location: "South Africa (Remote)",
+            intake: "Q1/2027 Intakes",
+            category: "Data Analyst",
+            status: "Saved",
+            appliedDate: "",
+            followUpDate: "2026-11-27"
+          },
+          {
+            id: "j5",
+            role: "Data Engineering Intern",
+            company: "CloudScale EU",
+            location: "Remote Global",
+            intake: "Q1/2027 Intakes",
+            category: "Data Engineering",
+            status: "Applied",
+            appliedDate: "2026-11-23",
+            followUpDate: "2026-11-30"
+          }
+        ],
+        weeklyJobTarget: 8,
+        tailor: {
+          senderContext: "Final-year Data Science & Statistics student (Python, SQL, LightGBM, dbt, RAG & document extraction workflows)",
+          inputText: "",
+          mode: "cv",
+          outputText: ""
+        },
+        sprint: {
+          blocks: [
+            { id: "b1", day: "Mon", pillar: "Deep Build", hours: 3, task: "Ship eval suite for Invoice Extractor (30 PDFs)", done: true },
+            { id: "b2", day: "Mon", pillar: "Applications & Outreach", hours: 1.5, task: "Apply to 2 Q1/2027 SA Data Science roles", done: true },
+            { id: "b3", day: "Tue", pillar: "Interview Prep", hours: 2, task: "SQL window functions + Python Pandas timed drills", done: false },
+            { id: "b4", day: "Tue", pillar: "Applications & Outreach", hours: 1.5, task: "Send 5 personalized AI workflow Loom DMs", done: false },
+            { id: "b5", day: "Wed", pillar: "Deep Build", hours: 3, task: "Train LightGBM churn model + SHAP dashboard", done: false },
+            { id: "b6", day: "Thu", pillar: "Client Delivery", hours: 2.5, task: "Refine pilot SOP RAG demo & ROI one-pager", done: false },
+            { id: "b7", day: "Fri", pillar: "Interview Prep", hours: 1.5, task: "ML system design & case study walkthrough", done: false },
+            { id: "b8", day: "Sat", pillar: "Deep Build", hours: 2.5, task: "Clean GitHub READMEs + record 90s demo video", done: false }
+          ],
+          habits: [
+            { id: "h1", name: "Push 1 GitHub commit or build log", days: [true, true, false, false, false, false, false] },
+            { id: "h2", name: "2 targeted job apps or agency DMs", days: [true, false, false, false, false, false, false] },
+            { id: "h3", name: "30 min SQL / Python interview drill", days: [true, true, false, false, false, false, false] },
+            { id: "h4", name: "Log eval metrics & update tracker", days: [true, false, false, false, false, false, false] }
+          ]
+        }
+      };
+    }
+
+    let state = loadState();
+    let draggedCardId = null;
+    let activeScopeTpl = "rag";
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return getDefaultState();
+        const parsed = JSON.parse(raw);
+        const def = getDefaultState();
+        return {
+          ...def,
+          ...parsed,
+          tailor: { ...def.tailor, ...(parsed.tailor || {}) },
+          sprint: { ...def.sprint, ...(parsed.sprint || {}) }
+        };
+      } catch (e) {
+        console.warn("Failed to parse saved state, loading defaults.", e);
+        return getDefaultState();
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        showToast("Storage warning: could not save locally", true);
+      }
+      updateTabCounts();
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.remove("show"), 2400);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) backdrop.classList.remove("open");
+      });
+    });
+
+    // Tab Navigation
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+      });
+    });
+
+    function updateTabCounts() {
+      document.getElementById("tabCountProjects").textContent = state.projects.length;
+      document.getElementById("tabCountJobs").textContent = state.jobs.length;
+      const totalHrs = state.sprint.blocks.reduce((sum, b) => sum + Number(b.hours || 0), 0);
+      document.getElementById("tabCountSprint").textContent = `${totalHrs}h`;
+    }
+
+    // =========================================================
+    // TAB 1: PROJECT & AGENCY BUILDER
+    // =========================================================
+    function renderKanban() {
+      const board = document.getElementById("kanbanBoard");
+      const typeFilter = document.getElementById("projectTypeFilter").value;
+      const filtered = state.projects.filter(p => typeFilter === "ALL" || p.type === typeFilter);
+
+      board.innerHTML = STAGES.map(stage => {
+        const cards = filtered.filter(p => p.stage === stage.id);
+        return `
+          <div class="kanban-col" data-stage="${escapeHtml(stage.id)}">
+            <div class="kanban-col-header">
+              <div class="col-title-wrap">
+                <span class="col-dot" style="background:${stage.color}"></span>
+                <span>${escapeHtml(stage.id)}</span>
+              </div>
+              <span class="badge badge-muted mono">${cards.length}</span>
+            </div>
+            <div class="kanban-cards">
+              ${cards.length === 0 ? `<div class="empty-state">Drop cards here</div>` : cards.map(renderProjectCard).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Attach drag & drop handlers
+      board.querySelectorAll(".project-card").forEach(card => {
+        card.addEventListener("dragstart", () => {
+          draggedCardId = card.dataset.id;
+          card.classList.add("dragging");
+        });
+        card.addEventListener("dragend", () => {
+          draggedCardId = null;
+          card.classList.remove("dragging");
+          board.querySelectorAll(".kanban-col").forEach(c => c.classList.remove("drag-over"));
+        });
+      });
+
+      board.querySelectorAll(".kanban-col").forEach(col => {
+        col.addEventListener("dragover", e => {
+          e.preventDefault();
+          col.classList.add("drag-over");
+        });
+        col.addEventListener("dragleave", () => col.classList.remove("drag-over"));
+        col.addEventListener("drop", e => {
+          e.preventDefault();
+          col.classList.remove("drag-over");
+          if (!draggedCardId) return;
+          moveProjectStage(draggedCardId, col.dataset.stage);
+        });
+      });
+    }
+
+    function renderProjectCard(p) {
+      const typeClass = p.type === "AI Agency Offer" ? "badge-agency" : "badge-portfolio";
+      const stackTags = (p.stack || "").split(",").map(s => s.trim()).filter(Boolean);
+      return `
+        <article class="project-card" draggable="true" data-id="${escapeHtml(p.id)}">
+          <div class="card-top">
+            <span class="badge ${typeClass}">${escapeHtml(p.type)}</span>
+            <div style="display:flex; gap:4px;">
+              <button class="btn btn-sm" onclick="editProject('${escapeHtml(p.id)}')" title="Edit">✎</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteProject('${escapeHtml(p.id)}')" title="Delete">✕</button>
+            </div>
+          </div>
+          <div class="card-title">${escapeHtml(p.title)}</div>
+          <p class="card-desc">${escapeHtml(p.problem)}</p>
+          <div class="tech-tags">
+            ${stackTags.map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join("")}
+          </div>
+          ${p.metric ? `<div class="card-metric">Eval: ${escapeHtml(p.metric)}</div>` : ""}
+          <div class="card-footer">
+            <select class="card-move-select" onchange="moveProjectStage('${escapeHtml(p.id)}', this.value)" title="Move stage">
+              ${STAGES.map(s => `<option value="${escapeHtml(s.id)}" ${s.id === p.stage ? "selected" : ""}>${escapeHtml(s.id)}</option>`).join("")}
+            </select>
+            ${p.link ? `<a class="btn btn-sm" href="${escapeHtml(p.link)}" target="_blank" rel="noopener noreferrer">Repo/Demo ↗</a>` : `<span style="font-size:0.72rem; color:var(--text-muted);">No link yet</span>`}
+          </div>
+        </article>
+      `;
+    }
+
+    function moveProjectStage(id, newStage) {
+      const item = state.projects.find(p => p.id === id);
+      if (!item || item.stage === newStage) return;
+      item.stage = newStage;
+      saveState();
+      renderKanban();
+      showToast(`Moved "${item.title}" → ${newStage}`);
+    }
+
+    function editProject(id) {
+      const p = state.projects.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById("projectModalTitle").textContent = "Edit Project / Offer Card";
+      document.getElementById("projId").value = p.id;
+      document.getElementById("projTitle").value = p.title;
+      document.getElementById("projType").value = p.type;
+      document.getElementById("projStage").value = p.stage;
+      document.getElementById("projStack").value = p.stack;
+      document.getElementById("projProblem").value = p.problem;
+      document.getElementById("projMetric").value = p.metric;
+      document.getElementById("projLink").value = p.link;
+      openModal("projectModal");
+    }
+
+    function deleteProject(id) {
+      state.projects = state.projects.filter(p => p.id !== id);
+      saveState();
+      renderKanban();
+      showToast("Card removed");
+    }
+
+    document.getElementById("projectTypeFilter").addEventListener("change", renderKanban);
+
+    document.getElementById("addProjectBtn").addEventListener("click", () => {
+      document.getElementById("projectModalTitle").textContent = "New Project / Offer Card";
+      document.getElementById("projectForm").reset();
+      document.getElementById("projId").value = "";
+      openModal("projectModal");
+    });
+
+    document.getElementById("projectForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = document.getElementById("projId").value;
+      const payload = {
+        id: id || "p_" + Date.now(),
+        title: document.getElementById("projTitle").value.trim(),
+        type: document.getElementById("projType").value,
+        stage: document.getElementById("projStage").value,
+        stack: document.getElementById("projStack").value.trim(),
+        problem: document.getElementById("projProblem").value.trim(),
+        metric: document.getElementById("projMetric").value.trim(),
+        link: document.getElementById("projLink").value.trim()
+      };
+
+      if (id) {
+        const idx = state.projects.findIndex(p => p.id === id);
+        if (idx !== -1) state.projects[idx] = payload;
+      } else {
+        state.projects.unshift(payload);
+      }
+
+      saveState();
+      renderKanban();
+      closeModal("projectModal");
+      showToast(id ? "Card updated" : "Card added to board");
+    });
+
+    // Generate Project Scope Helper
+    const SCOPE_TEMPLATES = {
+      rag: (niche) => ({
+        title: `${niche} Knowledge & SOP RAG Assistant`,
+        stack: "Python, FastAPI, pgvector, Hybrid BM25+Vector Search, Ragas",
+        problem: `Teams in ${niche} lose 5–8 hours/week searching scattered PDFs, onboarding docs, and Slack/email threads without reliable source citations.`,
+        metric: ">=92% faithfulness score, <1.8s response latency, 0 uncited policy claims",
+        scopeText: `PROJECT SCOPE: ${niche.toUpperCase()} RAG ASSISTANT\n` +
+          `1. Business Problem: Staff spend hours manually hunting across SOPs, compliance docs, and client handbooks.\n` +
+          `2. Core Architecture: Document ingestion pipeline (chunking + metadata) -> Hybrid Search (pgvector + BM25) -> LLM answer synthesis with clickable inline citations.\n` +
+          `3. Tech Stack: Python, FastAPI, Supabase/pgvector, OpenAI/Gemini API, Ragas for automated evals.\n` +
+          `4. Evaluation Criteria: 25-question golden Q&A benchmark measuring Faithfulness (>=92%), Answer Relevance (>=90%), and p95 Latency (<1.8s).\n` +
+          `5. Deliverable: Hosted web chat widget + ingestion script + eval report PDF.`
+      }),
+      kpi: (niche) => ({
+        title: `${niche} Automated KPI & Anomaly Dashboard`,
+        stack: "SQL, dbt, Python, DuckDB/BigQuery, Power BI / Metabase",
+        problem: `Decision-makers in ${niche} rely on stale Monday spreadsheets and spot revenue/margin leaks weeks too late.`,
+        metric: "100% automated daily refresh by 07:00, <3 min ETL runtime, weekly anomaly alerts",
+        scopeText: `PROJECT SCOPE: ${niche.toUpperCase()} AUTOMATED KPI DASHBOARD\n` +
+          `1. Business Problem: Disconnected CSV exports from sales, ops, and finance cause manual reporting errors.\n` +
+          `2. Core Architecture: Automated ingestion -> dbt SQL transformations & data quality tests -> Executive BI dashboard + Slack/Email anomaly digest.\n` +
+          `3. Tech Stack: PostgreSQL/BigQuery, dbt Core, Python (z-score/IQR anomaly detection), Power BI or Metabase.\n` +
+          `4. Evaluation Criteria: Zero schema/null test failures, pipeline runtime <3 mins, 6+ hrs/week analyst time reclaimed.\n` +
+          `5. Deliverable: Live BI workspace, documented SQL/dbt repo, and automated alert bot.`
+      }),
+      extract: (niche) => ({
+        title: `${niche} Lead & Document Extraction Workflow`,
+        stack: "Python, Pydantic, Vision LLM / OCR, n8n, Webhook -> CRM/Sheets",
+        problem: `Operations staff in ${niche} manually re-type PDF invoices, quotes, and inbound lead forms into CRM/ERP systems.`,
+        metric: ">=95% field-level extraction accuracy, <15s per document, 10+ hrs/wk saved",
+        scopeText: `PROJECT SCOPE: ${niche.toUpperCase()} LEAD & DOCUMENT EXTRACTION\n` +
+          `1. Business Problem: High-volume unstructured PDFs/emails bottleneck quoting, billing, and lead response speed.\n` +
+          `2. Core Architecture: Email/Folder watcher -> OCR & strict Pydantic JSON schema extraction -> Human-in-the-loop confidence check -> Auto-sync to CRM/ERP.\n` +
+          `3. Tech Stack: Python, Pydantic, Gemini/OpenAI structured outputs, n8n or FastAPI webhooks, Airtable/HubSpot.\n` +
+          `4. Evaluation Criteria: Tested on 30 real/synthetic docs achieving >=95% exact field accuracy and flagging low-confidence rows.\n` +
+          `5. Deliverable: End-to-end webhook workflow + accuracy benchmark scorecard.`
+      })
+    };
+
+    function updateScopePreview() {
+      const niche = document.getElementById("scopeNiche").value.trim() || "SME Operations";
+      const data = SCOPE_TEMPLATES[activeScopeTpl](niche);
+      document.getElementById("scopePreview").value = data.scopeText;
+    }
+
+    document.getElementById("openScopeModalBtn").addEventListener("click", () => {
+      updateScopePreview();
+      openModal("scopeModal");
+    });
+
+    document.querySelectorAll(".scope-tpl-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".scope-tpl-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeScopeTpl = btn.dataset.tpl;
+        updateScopePreview();
+      });
+    });
+
+    document.getElementById("scopeNiche").addEventListener("input", updateScopePreview);
+
+    document.getElementById("copyScopeBtn").addEventListener("click", async () => {
+      await copyText(document.getElementById("scopePreview").value);
+      showToast("Project scope copied!");
+    });
+
+    document.getElementById("addScopeToBoardBtn").addEventListener("click", () => {
+      const niche = document.getElementById("scopeNiche").value.trim() || "SME Operations";
+      const data = SCOPE_TEMPLATES[activeScopeTpl](niche);
+      state.projects.unshift({
+        id: "p_" + Date.now(),
+        title: data.title,
+        type: document.getElementById("scopeCardType").value,
+        stage: "Idea",
+        stack: data.stack,
+        problem: data.problem,
+        metric: data.metric,
+        link: ""
+      });
+      saveState();
+      renderKanban();
+      closeModal("scopeModal");
+      showToast("Scoped project added to Idea column!");
+    });
+
+    // =========================================================
+    // TAB 2: INTERNSHIP & ONLINE JOB TRACKER
+    // =========================================================
+    function getStartOfCurrentWeekISO() {
+      const now = new Date();
+      const day = now.getDay(); // 0=Sun, 1=Mon
+      const diff = (day === 0 ? -6 : 1 - day);
+      const monday = new Date(now);
+      monday.setDate(now.getDate() + diff);
+      monday.setHours(0, 0, 0, 0);
+      return monday.toISOString().slice(0, 10);
+    }
+
+    function renderJobStats() {
+      const total = state.jobs.length;
+      const appliedOrBeyond = state.jobs.filter(j => j.status !== "Saved");
+      const responses = state.jobs.filter(j => ["Assessment", "Interview", "Offer"].includes(j.status));
+      const responseRate = appliedOrBeyond.length > 0
+        ? Math.round((responses.length / appliedOrBeyond.length) * 100)
+        : 0;
+
+      const weekStart = getStartOfCurrentWeekISO();
+      const appliedThisWeek = state.jobs.filter(j => j.appliedDate && j.appliedDate >= weekStart && j.status !== "Saved").length;
+      const target = Math.max(1, Number(state.weeklyJobTarget || 8));
+      const pct = Math.min(100, Math.round((appliedThisWeek / target) * 100));
+
+      const todayISO = new Date().toISOString().slice(0, 10);
+      const dueFollowUps = state.jobs.filter(j => j.followUpDate && j.followUpDate <= todayISO && j.status !== "Offer").length;
+
+      document.getElementById("jobStatsGrid").innerHTML = `
+        <div class="stat-card">
+          <div class="stat-label">Total Tracked Roles</div>
+          <div class="stat-value">${total}</div>
+          <div class="stat-sub">${appliedOrBeyond.length} submitted • ${state.jobs.filter(j => j.status === "Saved").length} saved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Response Rate</div>
+          <div class="stat-value" style="color:var(--emerald)">${responseRate}%</div>
+          <div class="stat-sub">${responses.length} assessments / interviews / offers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Weekly Target Progress</div>
+          <div class="stat-value">${appliedThisWeek} / ${target}</div>
+          <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Follow-Ups Due</div>
+          <div class="stat-value" style="color:${dueFollowUps > 0 ? "var(--amber)" : "var(--text-primary)"}">${dueFollowUps}</div>
+          <div class="stat-sub">Follow-up date on or before today</div>
+        </div>
+      `;
+    }
+
+    function statusBadgeClass(status) {
+      switch (status) {
+        case "Offer": return "badge-emerald";
+        case "Interview": return "badge-portfolio";
+        case "Assessment": return "badge-amber";
+        case "Applied": return "badge-indigo";
+        default: return "badge-muted";
+      }
+    }
+
+    function renderJobsTable() {
+      renderJobStats();
+      const search = document.getElementById("jobSearchInput").value.trim().toLowerCase();
+      const locFilter = document.getElementById("jobLocationFilter").value;
+      const catFilter = document.getElementById("jobCategoryFilter").value;
+      const statusFilter = document.getElementById("jobStatusFilter").value;
+      const todayISO = new Date().toISOString().slice(0, 10);
+
+      const rows = state.jobs.filter(j => {
+        const matchSearch = !search ||
+          j.role.toLowerCase().includes(search) ||
+          j.company.toLowerCase().includes(search);
+
+        let matchLoc = true;
+        if (locFilter === "South Africa") matchLoc = j.location.includes("South Africa");
+        else if (locFilter === "Remote Global") matchLoc = j.location === "Remote Global";
+        else if (locFilter === "Q1/2027 Intakes") matchLoc = j.intake === "Q1/2027 Intakes";
+
+        const matchCat = catFilter === "ALL" || j.category === catFilter;
+        const matchStatus = statusFilter === "ALL" || j.status === statusFilter;
+        return matchSearch && matchLoc && matchCat && matchStatus;
+      });
+
+      const tbody = document.getElementById("jobsTableBody");
+      if (rows.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">No applications match your current filters.</div></td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows.map(j => {
+        const isDue = j.followUpDate && j.followUpDate <= todayISO && j.status !== "Offer";
+        return `
+          <tr>
+            <td><strong>${escapeHtml(j.role)}</strong></td>
+            <td>${escapeHtml(j.company)}</td>
+            <td>
+              <div>${escapeHtml(j.location)}</div>
+              <span class="badge ${j.intake === "Q1/2027 Intakes" ? "badge-indigo" : "badge-muted"}" style="margin-top:3px;">${escapeHtml(j.intake)}</span>
+            </td>
+            <td><span class="badge badge-muted">${escapeHtml(j.category)}</span></td>
+            <td>
+              <select class="select" style="padding:4px 8px; font-size:0.76rem; width:auto;" onchange="quickUpdateJobStatus('${escapeHtml(j.id)}', this.value)">
+                ${["Saved","Applied","Assessment","Interview","Offer"].map(st =>
+                  `<option value="${st}" ${st === j.status ? "selected" : ""}>${st}</option>`
+                ).join("")}
+              </select>
+            </td>
+            <td class="mono">${j.appliedDate ? escapeHtml(j.appliedDate) : "—"}</td>
+            <td class="mono">
+              ${j.followUpDate
+                ? `<span class="badge ${isDue ? "badge-amber" : "badge-muted"}">${escapeHtml(j.followUpDate)}${isDue ? " • Due" : ""}</span>`
+                : "—"}
+            </td>
+            <td style="text-align:right; white-space:nowrap;">
+              <button class="btn btn-sm" onclick="editJob('${escapeHtml(j.id)}')">✎</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteJob('${escapeHtml(j.id)}')">✕</button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function quickUpdateJobStatus(id, newStatus) {
+      const job = state.jobs.find(j => j.id === id);
+      if (!job) return;
+      job.status = newStatus;
+      if (newStatus !== "Saved" && !job.appliedDate) {
+        job.appliedDate = new Date().toISOString().slice(0, 10);
+      }
+      saveState();
+      renderJobsTable();
+      showToast(`Updated ${job.company} → ${newStatus}`);
+    }
+
+    function editJob(id) {
+      const j = state.jobs.find(x => x.id === id);
+      if (!j) return;
+      document.getElementById("jobModalTitle").textContent = "Edit Application";
+      document.getElementById("jobId").value = j.id;
+      document.getElementById("jobRole").value = j.role;
+      document.getElementById("jobCompany").value = j.company;
+      document.getElementById("jobLocation").value = j.location;
+      document.getElementById("jobIntake").value = j.intake;
+      document.getElementById("jobCategory").value = j.category;
+      document.getElementById("jobStatus").value = j.status;
+      document.getElementById("jobAppliedDate").value = j.appliedDate || "";
+      document.getElementById("jobFollowUpDate").value = j.followUpDate || "";
+      openModal("jobModal");
+    }
+
+    function deleteJob(id) {
+      state.jobs = state.jobs.filter(j => j.id !== id);
+      saveState();
+      renderJobsTable();
+      showToast("Application deleted");
+    }
+
+    document.getElementById("addJobBtn").addEventListener("click", () => {
+      document.getElementById("jobModalTitle").textContent = "Add Application";
+      document.getElementById("jobForm").reset();
+      document.getElementById("jobId").value = "";
+      document.getElementById("jobAppliedDate").value = new Date().toISOString().slice(0, 10);
+      openModal("jobModal");
+    });
+
+    document.getElementById("jobForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const id = document.getElementById("jobId").value;
+      const payload = {
+        id: id || "j_" + Date.now(),
+        role: document.getElementById("jobRole").value.trim(),
+        company: document.getElementById("jobCompany").value.trim(),
+        location: document.getElementById("jobLocation").value,
+        intake: document.getElementById("jobIntake").value,
+        category: document.getElementById("jobCategory").value,
+        status: document.getElementById("jobStatus").value,
+        appliedDate: document.getElementById("jobAppliedDate").value,
+        followUpDate: document.getElementById("jobFollowUpDate").value
+      };
+
+      if (id) {
+        const idx = state.jobs.findIndex(j => j.id === id);
+        if (idx !== -1) state.jobs[idx] = payload;
+      } else {
+        state.jobs.unshift(payload);
+      }
+
+      saveState();
+      renderJobsTable();
+      closeModal("jobModal");
+      showToast(id ? "Application updated" : "Application added");
+    });
+
+    document.getElementById("editWeeklyTargetBtn").addEventListener("click", () => {
+      const val = prompt("Set your weekly application target:", state.weeklyJobTarget || 8);
+      if (val === null) return;
+      const num = parseInt(val, 10);
+      if (!isNaN(num) && num > 0) {
+        state.weeklyJobTarget = num;
+        saveState();
+        renderJobStats();
+        showToast(`Weekly target set to ${num}`);
+      }
+    });
+
+    ["jobSearchInput", "jobLocationFilter", "jobCategoryFilter", "jobStatusFilter"].forEach(id => {
+      document.getElementById(id).addEventListener("input", renderJobsTable);
+      document.getElementById(id).addEventListener("change", renderJobsTable);
+    });
+
+    document.getElementById("clearJobFiltersBtn").addEventListener("click", () => {
+      document.getElementById("jobSearchInput").value = "";
+      document.getElementById("jobLocationFilter").value = "ALL";
+      document.getElementById("jobCategoryFilter").value = "ALL";
+      document.getElementById("jobStatusFilter").value = "ALL";
+      renderJobsTable();
+    });
+
+    // =========================================================
+    // TAB 3: CV & OUTREACH TAILOR
+    // =========================================================
+    const SIGNAL_KEYWORDS = [
+      "Python", "SQL", "Power BI", "Tableau", "dbt", "Snowflake", "BigQuery",
+      "Machine Learning", "LightGBM", "XGBoost", "Scikit-learn", "ETL", "Spark",
+      "RAG", "LLM", "LangChain", "FastAPI", "Docker", "OCR", "Automation", "n8n",
+      "CRM", "HubSpot", "Invoices", "Forecasting", "Churn", "KPI", "Dashboard", "API"
+    ];
+
+    function detectSignals(text) {
+      if (!text.trim()) return [];
+      const lower = text.toLowerCase();
+      return SIGNAL_KEYWORDS.filter(k => lower.includes(k.toLowerCase()));
+    }
+
+    function generateTailoredOutput() {
+      const input = document.getElementById("tailorInputText").value.trim();
+      const sender = document.getElementById("tailorSenderContext").value.trim() ||
+        "Data Science graduate skilled in Python, SQL, BI, and applied AI workflows";
+      const mode = state.tailor.mode || "cv";
+      const signals = detectSignals(input);
+      const topSkills = signals.length ? signals.slice(0, 6).join(", ") : "Python, SQL, Power BI, Applied ML";
+      const primarySkill = signals[0] || "Python & SQL";
+      const secondarySkill = signals[1] || "automated data pipelines";
+
+      const chipsEl = document.getElementById("detectedSignals");
+      chipsEl.innerHTML = signals.length
+        ? signals.map(s => `<span class="badge badge-portfolio">${escapeHtml(s)}</span>`).join("")
+        : `<span class="badge badge-muted">Paste text to auto-detect stack & pain signals</span>`;
+
+      const snippet = input
+        ? input.split(/\n+/)[0].slice(0, 90)
+        : "[Target Company / Role]";
+
+      let out = "";
+      if (mode === "cv") {
+        document.getElementById("tailorOutputLabel").textContent = "Structured Output — Tailor CV Bullets";
+        out =
+`=== TAILORED CV SUMMARY LINE ===
+${sender}. Proven track record building production-ready ${topSkills} solutions with measurable evaluation metrics.
+
+=== XYZ-FORMULA IMPACT BULLETS (Choose 3-4) ===
+• Engineered an end-to-end ${primarySkill} & ${secondarySkill} solution addressing core bottlenecks in [${snippet}], improving accuracy to [94%+] and cutting manual processing time by [10+ hrs/week].
+• Built automated data validation and evaluation pipelines using ${topSkills}, reducing reporting latency from [days] to [<5 minutes] with zero schema failures.
+• Designed interactive KPI & decision-support views backed by clean SQL/Python models, enabling stakeholders to track [churn / margin / SLA] anomalies in real time.
+• Packaged project with reproducible tests, Docker/FastAPI endpoints, and documented evaluation scorecards aligned with production standards.
+
+=== KEYWORDS TO WEAVE INTO SKILLS SECTION ===
+${topSkills}`;
+      } else if (mode === "outreach") {
+        document.getElementById("tailorOutputLabel").textContent = "Structured Output — Cold Outreach Message";
+        out =
+`SUBJECT: Quick idea re: ${primarySkill} / automating [${snippet.slice(0, 42)}]
+
+Hi [First Name],
+
+I noticed from your brief (${snippet}...) that your team is focusing on ${topSkills}.
+
+I'm a Data Science grad and AI workflow builder (${sender}). Last week I shipped a working prototype using ${primarySkill} and ${secondarySkill} that cut manual document/reporting work by ~10 hrs/week while hitting [95%+] evaluation accuracy.
+
+Rather than sending a generic CV/pitch, I recorded a 90-second walkthrough showing how this applies directly to [Company Name]'s workflow.
+
+Open to me sending the 90s Loom link over—no call needed unless it looks useful?
+
+Best,
+[Your Name]
+[GitHub / Portfolio Link] • [LinkedIn]`;
+      } else {
+        document.getElementById("tailorOutputLabel").textContent = "Structured Output — Discovery Call Questions";
+        out =
+`=== 20-MIN DISCOVERY CALL SCRIPT (${snippet.slice(0, 45)}) ===
+
+1. CURRENT WORKFLOW & BOTTLENECK
+• "Walk me through how your team currently handles [${primarySkill} / reporting / extraction] from start to finish."
+• "Where does manual copy-pasting or waiting on data slow the team down the most each week?"
+
+2. QUANTIFYING THE PAIN (ROI ANCHOR)
+• "Roughly how many hours per week—or how many records/documents—does this touch right now?"
+• "What happens when an error slips through or a report arrives 2 days late?"
+
+3. DATA READINESS & TECH STACK (${topSkills})
+• "Where does the source data live today (PDFs, email, SQL DB, CRM, spreadsheets)?"
+• "Who owns permissions/API access, and where should the clean output land so your team actually uses it?"
+
+4. EVALUATION & SUCCESS CRITERIA
+• "If we pilot a v1 over 14 days, what exact metric (e.g., 95% extraction accuracy, 8 hrs saved/week) makes it an obvious win?"
+
+5. NEXT STEP CLOSE
+• "Great—I'll scope a fixed 2-week pilot with clear eval benchmarks and send a 1-page proposal by tomorrow at 10:00."`;
+      }
+
+      document.getElementById("tailorOutputBox").value = out;
+      state.tailor.inputText = input;
+      state.tailor.senderContext = sender;
+      state.tailor.outputText = out;
+      saveState();
+    }
+
+    function renderTailorTab() {
+      document.getElementById("tailorSenderContext").value = state.tailor.senderContext || "";
+      document.getElementById("tailorInputText").value = state.tailor.inputText || "";
+      document.querySelectorAll(".mode-pill").forEach(pill => {
+        pill.classList.toggle("active", pill.dataset.mode === state.tailor.mode);
+      });
+      if (state.tailor.outputText) {
+        document.getElementById("tailorOutputBox").value = state.tailor.outputText;
+        const signals = detectSignals(state.tailor.inputText || "");
+        document.getElementById("detectedSignals").innerHTML = signals.length
+          ? signals.map(s => `<span class="badge badge-portfolio">${escapeHtml(s)}</span>`).join("")
+          : `<span class="badge badge-muted">Paste text to auto-detect stack & pain signals</span>`;
+      } else {
+        generateTailoredOutput();
+      }
+    }
+
+    document.querySelectorAll(".mode-pill").forEach(pill => {
+      pill.addEventListener("click", () => {
+        document.querySelectorAll(".mode-pill").forEach(p => p.classList.remove("active"));
+        pill.classList.add("active");
+        state.tailor.mode = pill.dataset.mode;
+        generateTailoredOutput();
+      });
+    });
+
+    document.getElementById("generateTailorBtn").addEventListener("click", () => {
+      generateTailoredOutput();
+      showToast("Structured output generated!");
+    });
+
+    document.getElementById("tailorInputText").addEventListener("input", () => {
+      state.tailor.inputText = document.getElementById("tailorInputText").value;
+      saveState();
+    });
+
+    document.getElementById("tailorSenderContext").addEventListener("input", () => {
+      state.tailor.senderContext = document.getElementById("tailorSenderContext").value;
+      saveState();
+    });
+
+    document.getElementById("tailorOutputBox").addEventListener("input", () => {
+      state.tailor.outputText = document.getElementById("tailorOutputBox").value;
+      saveState();
+    });
+
+    document.getElementById("copyTailorOutputBtn").addEventListener("click", async () => {
+      await copyText(document.getElementById("tailorOutputBox").value);
+      showToast("Copied to clipboard!");
+    });
+
+    document.getElementById("loadSampleJdBtn").addEventListener("click", () => {
+      document.getElementById("tailorInputText").value =
+        "Junior Data Scientist (Q1 2027 Graduate Intake) - Cape Town / Hybrid\nWe are seeking a graduate fluent in Python, SQL, and Machine Learning (LightGBM/XGBoost) to build customer churn forecasting models, automate ETL pipelines with dbt & BigQuery, and surface KPI dashboards in Power BI.";
+      generateTailoredOutput();
+    });
+
+    document.getElementById("loadSampleClientBtn").addEventListener("click", () => {
+      document.getElementById("tailorInputText").value =
+        "Regional Logistics & Freight Broker (18 staff)\nProcesses 400+ supplier PDF invoices and waybills per week via email. Staff manually type line items into Excel and HubSpot CRM, leading to billing delays and missed follow-ups. Looking for document OCR automation and automated KPI reporting.";
+      generateTailoredOutput();
+    });
+
+    // =========================================================
+    // TAB 4: WEEKLY SPRINT PLANNER
+    // =========================================================
+    function renderSprint() {
+      const blocks = state.sprint.blocks;
+      const totalHours = blocks.reduce((s, b) => s + Number(b.hours || 0), 0);
+      const doneHours = blocks.filter(b => b.done).reduce((s, b) => s + Number(b.hours || 0), 0);
+      const pct = totalHours > 0 ? Math.round((doneHours / totalHours) * 100) : 0;
+
+      document.getElementById("sprintSummaryText").textContent = `${doneHours}h completed of ${totalHours}h planned`;
+      document.getElementById("sprintCompletionPct").textContent = `${pct}% completed`;
+
+      // Pillar allocation bar & legend
+      const bar = document.getElementById("allocationBar");
+      const legend = document.getElementById("pillarLegend");
+      const pillarKeys = Object.keys(PILLARS);
+
+      bar.innerHTML = totalHours === 0 ? "" : pillarKeys.map(k => {
+        const hrs = blocks.filter(b => b.pillar === k).reduce((s, b) => s + Number(b.hours || 0), 0);
+        const w = (hrs / totalHours) * 100;
+        return w > 0 ? `<div style="width:${w}%; background:${PILLARS[k].color};" title="${PILLARS[k].label}: ${hrs}h"></div>` : "";
+      }).join("");
+
+      legend.innerHTML = pillarKeys.map(k => {
+        const hrs = blocks.filter(b => b.pillar === k).reduce((s, b) => s + Number(b.hours || 0), 0);
+        return `
+          <div class="pillar-pill">
+            <span style="display:flex; align-items:center; gap:7px;">
+              <span class="col-dot" style="background:${PILLARS[k].color}"></span>
+              <span>${escapeHtml(k)}</span>
+            </span>
+            <strong class="mono">${hrs}h</strong>
+          </div>
+        `;
+      }).join("");
+
+      // Days grid
+      const daysGrid = document.getElementById("sprintDaysGrid");
+      daysGrid.innerHTML = DAYS.map(day => {
+        const dayBlocks = blocks.filter(b => b.day === day);
+        const dayHrs = dayBlocks.reduce((s, b) => s + Number(b.hours || 0), 0);
+        return `
+          <div class="day-card">
+            <div class="day-card-header">
+              <h4>${day}</h4>
+              <span class="mono" style="font-size:0.75rem; color:var(--text-secondary);">${dayHrs}h</span>
+            </div>
+            ${dayBlocks.length === 0
+              ? `<div style="font-size:0.75rem; color:var(--text-muted); padding:8px 0;">Rest / flex buffer</div>`
+              : dayBlocks.map(b => `
+                <div class="block-item ${b.done ? "done" : ""}">
+                  <input type="checkbox" ${b.done ? "checked" : ""} onchange="toggleBlock('${escapeHtml(b.id)}')" style="margin-top:3px; accent-color:var(--emerald); cursor:pointer;" />
+                  <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; gap:4px; margin-bottom:2px;">
+                      <span style="font-size:0.69rem; font-weight:700; color:${PILLARS[b.pillar]?.color || "#94a3b8"}">${escapeHtml(b.pillar)}</span>
+                      <span class="mono" style="font-size:0.7rem; color:var(--text-secondary);">${b.hours}h</span>
+                    </div>
+                    <div class="block-task">${escapeHtml(b.task)}</div>
+                  </div>
+                  <button class="btn btn-sm" style="padding:2px 5px; border:none; background:transparent; color:var(--text-muted);" onclick="deleteBlock('${escapeHtml(b.id)}')" title="Remove">✕</button>
+                </div>
+              `).join("")}
+          </div>
+        `;
+      }).join("");
+
+      // Daily Habits
+      const habitsEl = document.getElementById("habitsContainer");
+      let checkedCount = 0;
+      const totalChecks = state.sprint.habits.length * 7;
+
+      habitsEl.innerHTML = state.sprint.habits.map(h => {
+        checkedCount += h.days.filter(Boolean).length;
+        return `
+          <div class="habit-row">
+            <span style="padding-right:6px;">${escapeHtml(h.name)}</span>
+            ${h.days.map((val, idx) => `
+              <button type="button" class="habit-check ${val ? "checked" : ""}" onclick="toggleHabit('${escapeHtml(h.id)}', ${idx})" aria-label="Toggle ${escapeHtml(h.name)} day ${idx + 1}">
+                ✓
+              </button>
+            `).join("")}
+            <button type="button" class="btn btn-sm" style="padding:2px 4px; border:none; background:transparent; color:var(--text-muted);" onclick="deleteHabit('${escapeHtml(h.id)}')" title="Remove habit">✕</button>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("habitScoreLabel").textContent = `${checkedCount}/${totalChecks} checks`;
+    }
+
+    function toggleBlock(id) {
+      const b = state.sprint.blocks.find(x => x.id === id);
+      if (!b) return;
+      b.done = !b.done;
+      saveState();
+      renderSprint();
+    }
+
+    function deleteBlock(id) {
+      state.sprint.blocks = state.sprint.blocks.filter(b => b.id !== id);
+      saveState();
+      renderSprint();
+    }
+
+    function toggleHabit(habitId, dayIdx) {
+      const h = state.sprint.habits.find(x => x.id === habitId);
+      if (!h) return;
+      h.days[dayIdx] = !h.days[dayIdx];
+      saveState();
+      renderSprint();
+    }
+
+    function deleteHabit(habitId) {
+      state.sprint.habits = state.sprint.habits.filter(h => h.id !== habitId);
+      saveState();
+      renderSprint();
+    }
+
+    document.getElementById("addTimeBlockBtn").addEventListener("click", () => {
+      document.getElementById("timeBlockForm").reset();
+      document.getElementById("tbHours").value = "2";
+      openModal("timeBlockModal");
+    });
+
+    document.getElementById("timeBlockForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      state.sprint.blocks.push({
+        id: "b_" + Date.now(),
+        day: document.getElementById("tbDay").value,
+        pillar: document.getElementById("tbPillar").value,
+        hours: parseFloat(document.getElementById("tbHours").value) || 1,
+        task: document.getElementById("tbTask").value.trim(),
+        done: false
+      });
+      saveState();
+      renderSprint();
+      closeModal("timeBlockModal");
+      showToast("Time block added");
+    });
+
+    document.getElementById("addHabitBtn").addEventListener("click", () => {
+      const name = prompt("Enter a daily habit (e.g., 20m reading ML papers or outreach follow-ups):");
+      if (!name || !name.trim()) return;
+      state.sprint.habits.push({
+        id: "h_" + Date.now(),
+        name: name.trim(),
+        days: [false, false, false, false, false, false, false]
+      });
+      saveState();
+      renderSprint();
+      showToast("Habit added");
+    });
+
+    // =========================================================
+    // UTILITIES: COPY, EXPORT JSON, IMPORT JSON, RESET
+    // =========================================================
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const tmp = document.createElement("textarea");
+        tmp.value = text;
+        document.body.appendChild(tmp);
+        tmp.select();
+        document.execCommand("copy");
+        document.body.removeChild(tmp);
+      }
+    }
+
+    document.getElementById("exportJsonBtn").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ds-agency-command-center-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Exported JSON backup!");
+    });
+
+    document.getElementById("importJsonInput").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const imported = JSON.parse(reader.result);
+          if (!imported || !Array.isArray(imported.projects) || !Array.isArray(imported.jobs) || !imported.sprint) {
+            throw new Error("Invalid command center JSON schema");
+          }
+          const def = getDefaultState();
+          state = {
+            ...def,
+            ...imported,
+            tailor: { ...def.tailor, ...(imported.tailor || {}) },
+            sprint: { ...def.sprint, ...(imported.sprint || {}) }
+          };
+          saveState();
+          renderAll();
+          showToast("Imported JSON backup successfully!");
+        } catch (err) {
+          alert("Could not import JSON: " + err.message);
+        }
+        e.target.value = "";
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById("resetDemoBtn").addEventListener("click", () => {
+      if (!confirm("Reset all boards, applications, and sprint plans back to the default starter data?")) return;
+      state = getDefaultState();
+      saveState();
+      renderAll();
+      showToast("Reset to starter data");
+    });
+
+    function renderAll() {
+      updateTabCounts();
+      renderKanban();
+      renderJobsTable();
+      renderTailorTab();
+      renderSprint();
+    }
+
+    // Boot
+    renderAll();
+  </script>
+</body>
+</html>
